@@ -100,6 +100,7 @@
             position: relative;
             overflow: hidden;
             margin-top: 80px;
+            border-bottom: 5px solid #dc2626;
         }
 
         .hero::before {
@@ -191,7 +192,7 @@
 
         /* About Section */
         .about {
-            padding: 6rem 5%;
+            padding: 4rem 5%;
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
@@ -257,13 +258,57 @@
 
         /* Services Section */
         .services {
-            padding: 6rem 5%;
+            padding: 4rem 5%;
             background: #fef2f2;
+        }
+
+        /* Location CTA Section */
+        .location-cta {
+            padding: 3rem 5%;
+            background: #dc2626;
+            color: white;
+            text-align: center;
+        }
+
+        .location-cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .location-cta h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .location-cta p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .appointment-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: white;
+            color: #dc2626;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .appointment-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+            background: #fee2e2;
         }
 
         /* Image Section after Services */
         .image-section {
-            padding: 6rem 5%;
+            padding: 4rem 5%;
             max-width: 1400px;
             margin: 0 auto;
             text-align: center;
@@ -290,15 +335,15 @@
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
             max-width: 1400px;
             margin: 0 auto;
         }
 
         .service-card {
             background: white;
-            padding: 2.5rem;
+            padding: 3rem;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
             transition: all 0.4s;
@@ -314,7 +359,7 @@
             width: 100%;
             height: 5px;
             background: linear-gradient(90deg, #dc2626, #ef4444);
-            transform: scaleX(0);
+            transform: scaleX(1);
             transition: transform 0.4s;
         }
 
@@ -328,19 +373,20 @@
         }
 
         .service-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.7rem;
             color: #1a1a1a;
             margin-bottom: 1rem;
         }
 
         .service-card p {
             color: #6b7280;
-            line-height: 1.6;
+            line-height: 1.7;
+            font-size: 1.1rem;
         }
 
         /* Stats Section */
         .stats {
-            padding: 6rem 5%;
+            padding: 4rem 5%;
             background: #dc2626;
             color: white;
         }
@@ -376,7 +422,7 @@
 
         /* Bio Section */
         .bio {
-            padding: 6rem 5%;
+            padding: 4rem 5%;
             max-width: 1200px;
             margin: 0 auto;
             text-align: center;
@@ -397,7 +443,7 @@
 
         /* Contact Section */
         .contact {
-            padding: 6rem 5%;
+            padding: 4rem 5%;
             max-width: 1400px;
             margin: 0 auto;
         }
@@ -516,7 +562,12 @@
             .hero h1 { font-size: 2.5rem; }
             .hero h2 { font-size: 1.5rem; }
             .about, .contact-content { grid-template-columns: 1fr; }
+            .services-grid { grid-template-columns: 1fr; }
             .nav-links { display: none; }
+        }
+
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
@@ -549,6 +600,14 @@
             <p>Cu peste 15 ani de experiență în domeniul dreptului medical, am dezvoltat o înțelegere profundă a complexității cazurilor de malpraxis medical.</p>
             <p>Fiecare caz este tratat cu maximă seriozitate și profesionalism, asigurând că drepturile tale sunt protejate și că primești compensația meritată pentru suferințele îndurate.</p>
             <p>Înțeleg că momentele prin care treci sunt dificile, de aceea ofer suport juridic complet și consultanță personalizată pentru fiecare situație, ghidându-te pas cu pas prin întregul proces judiciar.</p>
+        </div>
+    </section>
+
+    <section class="location-cta">
+        <div class="location-cta-content">
+            <h3>Mă găsești la cabinetul meu</h3>
+            <p>Str. Exemplu Nr. 123, București, Sector 1</p>
+            <a href="#contact" class="appointment-button">Programează Întâlnire</a>
         </div>
     </section>
 
@@ -659,5 +718,51 @@
         </div>
         <p>&copy; 2024 Avocat Dan Tătaru. Toate drepturile rezervate.</p>
     </footer>
+
+    <script>
+        // Animație pentru numerele din secțiunea stats
+        function animateValue(element, start, end, duration, suffix = '') {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.innerHTML = value + suffix;
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Observăm când secțiunea stats devine vizibilă
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statNumbers = entry.target.querySelectorAll('.stat-number');
+                    
+                    // Animăm fiecare număr
+                    animateValue(statNumbers[0], 0, 250, 2000, '+');
+                    animateValue(statNumbers[1], 0, 15, 2000, '+');
+                    animateValue(statNumbers[2], 0, 95, 2000, '%');
+                    statNumbers[3].innerHTML = '24/7';
+                    
+                    // Dezactivăm observer-ul după ce animația a rulat
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observăm secțiunea stats
+        const statsSection = document.querySelector('.stats');
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+    </script>
 </body>
 </html>
